@@ -51,6 +51,14 @@ public class Main {
             } catch (IOException ioException) {
                 System.out.println("Logging failed: " + ioException.getMessage());
             }
+            {
+                try {
+                    FileUtils.logInfo(e.toString());
+
+            } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
         } finally {
             long endTime = System.currentTimeMillis(); // End time measurement
             long duration = endTime - startTime; // Calculate duration

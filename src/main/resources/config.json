@@ -1,0 +1,84 @@
+{
+  "application": {
+    "version": "1.0.0"
+  },
+  "errorHandling": {
+    "enableErrorLogging": true,
+    "retryPolicy": {
+      "maxRetries": 3,
+      "retryDelay": "2s"
+    },
+    "fallback": {
+      "enabled": true,
+      "action": "logAndContinue"
+    }
+  },
+  "pooling": {
+    "connectionPooling": {
+      "maxPoolSize": 10,
+      "minPoolSize": 1,
+      "idleTimeout": "30s"
+    }
+  },
+  "logging": {
+    "logFilePath": "C:\\Users\\nikhitha.reddy_simad\\logs\\app.log",
+    "logFormat": "[%d{yyyy-MM-dd HH:mm:ss}] %-5p %c{1} - %m%n"
+
+  },
+  "concurrency": {
+    "taskSettings": {
+      "parallelism": 4,
+      "maxConcurrentTasks": 10
+    }
+  },
+  "dataValidation": {
+    "inputFile": {
+      "path": "C:\\Users\\nikhitha.reddy_simad\\test.csv",
+      "validations": {
+        "mustExist": true,
+        "mustBeReadable": true
+      }
+    },
+    "outputFile": {
+      "path": "C:\\Users\\nikhitha.reddy_simad\\niki.csv",
+      "validations": {
+        "mustExist": false,
+        "mustBeWritable": true
+      }
+    },
+    "processingRules": {
+      "delimiter": ",",
+      "headerIncluded": true,
+      "skipEmptyLines": true
+    },
+
+    "sftp": {
+      "hostname": "sftp.example.com",
+      "port": 22,
+      "username": "your_username",
+      "privateKey": "/path/to/private/key",
+      "remotePath": "/remote/path/to/file.csv"
+    },
+    "dateFormat": "yyyy-MM-dd"
+  },
+  "fieldValidations": [
+    {
+      "fieldName": "stringField",
+      "index": 0,
+      "type": "string",
+      "description": "This field should contain string values.",
+      "regex": "^[a-zA-Z\\s]+$",
+      "isRequired": true,
+      "isUnique": true
+    },
+    {
+      "fieldName": "decimalField",
+      "index": 1,
+      "type": "decimal",
+      "description": "This field should contain decimal values.",
+      "regex": "^[0-9]*\\.?[0-9]+$",
+      "isRequired": true,
+      "isUnique": true
+    }
+  ]
+}
